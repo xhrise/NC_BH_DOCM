@@ -738,6 +738,6 @@ this.setAttributeValue( DocType.VMEMO,vmemo);
 
   @Override
   public IVOMeta getMetaData() {
-    return VOMetaFactory.getInstance().getVOMeta("docmng.DocType");
+    return VOMetaFactory.getInstance().getVOMeta("docmng.doctype");
   }
 }
