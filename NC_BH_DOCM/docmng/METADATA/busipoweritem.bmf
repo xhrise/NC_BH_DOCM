@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component conRouterType="曼哈顿直角" createIndustry="0" createTime="2015-05-19 15:43:54" creator="YONYOU NC" description="" displayName="busipoweritem" fromSourceBmf="true" gencodestyle="自定义样式" help="" id="3375a071-24fa-453d-aeb0-4003e148c960" industry="0" industryChanged="false" industryIncrease="false" industryName="" isSource="false" isbizmodel="false" mainEntity="4ea03863-8035-4cf0-add3-37b85ad9ec1a" metaType="bmf" modifier="YONYOU NC" modifyIndustry="0" modifyTime="2015-05-19 15:45:53" name="busipoweritem" namespace="docmng" ownModule="docmng" preLoad="false" programcode="0" resModuleName="busipoweritem" resid="" version="3" versionType="0">
+    <celllist>
+        <entity accessorClassName="nc.md.model.access.javamap.NCBeanStyle" bizItfImpClassName="" componentID="3375a071-24fa-453d-aeb0-4003e148c960" createIndustry="0" createTime="2015-05-19 15:44:07" creator="YONYOU NC" czlist="" description="" displayName="权限功能项" fullClassName="nc.vo.docmng.busipoweritem.BusiPowerItem" height="100" help="" id="4ea03863-8035-4cf0-add3-37b85ad9ec1a" industryChanged="false" isAuthen="true" isCreateSQL="true" isExtendBean="false" isPrimary="true" isSource="true" keyAttributeId="fbd1daa3-b261-4250-a92e-888e4046d0c2" modInfoClassName="" modifier="YONYOU NC" modifyIndustry="0" modifyTime="2015-05-19 15:59:18" name="BusiPowerItem" resid="" stereoType="" tableName="docmng_BusiPowerItem" userDefClassName="" versionType="0" visibility="public" width="100" x="340" y="78">
+            <attributelist>
+                <attribute accessStrategy="" accesspower="false" accesspowergroup="" calculation="false" classID="4ea03863-8035-4cf0-add3-37b85ad9ec1a" createIndustry="0" dataType="BS000010000100001051" dataTypeStyle="SINGLE" dbtype="char" defaultValue="" description="" displayName="主键" dynamic="false" dynamicTable="" fieldName="pk_busipower" fieldType="char" fixedLength="false" forLocale="false" help="" id="fbd1daa3-b261-4250-a92e-888e4046d0c2" industryChanged="false" isActive="true" isAuthorization="true" isDefaultDimensionAttribute="false" isDefaultMeasureAttribute="false" isFeature="false" isGlobalization="false" isHide="false" isKey="true" isNullable="false" isReadOnly="false" isShare="false" isSource="true" length="20" maxValue="" minValue="" modifyIndustry="0" name="pk_busipower" notSerialize="false" precise="" refModelName="" resid="" sequence="0" typeDisplayName="UFID" typeName="UFID" versionType="0" visibility="public"/>
+                <attribute accessStrategy="" accesspower="false" accesspowergroup="" calculation="false" classID="4ea03863-8035-4cf0-add3-37b85ad9ec1a" createIndustry="0" dataType="BS000010000100001001" dataTypeStyle="SINGLE" dbtype="varchar" defaultValue="" description="" displayName="编码" dynamic="false" dynamicTable="" fieldName="code" fieldType="varchar" fixedLength="false" forLocale="false" help="" id="6cd6de12-d823-4095-82ac-855fdbe37acb" industryChanged="false" isActive="true" isAuthorization="true" isDefaultDimensionAttribute="false" isDefaultMeasureAttribute="false" isFeature="false" isGlobalization="false" isHide="false" isKey="false" isNullable="true" isReadOnly="false" isShare="false" isSource="true" length="50" maxValue="" minValue="" modifyIndustry="0" name="code" notSerialize="false" precise="" refModelName="" resid="" sequence="1" typeDisplayName="String" typeName="String" versionType="0" visibility="public"/>
+                <attribute accessStrategy="" accesspower="false" accesspowergroup="" calculation="false" classID="4ea03863-8035-4cf0-add3-37b85ad9ec1a" createIndustry="0" dataType="BS000010000100001001" dataTypeStyle="SINGLE" dbtype="varchar" defaultValue="" description="" displayName="名称" dynamic="false" dynamicTable="" fieldName="name" fieldType="varchar" fixedLength="false" forLocale="false" help="" id="3eee4c6e-d32f-43ce-9dc4-8401b8f3be1e" industryChanged="false" isActive="true" isAuthorization="true" isDefaultDimensionAttribute="false" isDefaultMeasureAttribute="false" isFeature="false" isGlobalization="false" isHide="false" isKey="false" isNullable="true" isReadOnly="false" isShare="false" isSource="true" length="50" maxValue="" minValue="" modifyIndustry="0" name="name" notSerialize="false" precise="" refModelName="" resid="" sequence="2" typeDisplayName="String" typeName="String" versionType="0" visibility="public"/>
+                <attribute accessStrategy="" accesspower="false" accesspowergroup="" calculation="false" classID="4ea03863-8035-4cf0-add3-37b85ad9ec1a" createIndustry="0" dataType="BS000010000100001001" dataTypeStyle="SINGLE" dbtype="varchar" defaultValue="" description="" displayName="上级对象" dynamic="false" dynamicTable="" fieldName="pid" fieldType="varchar" fixedLength="false" forLocale="false" help="" id="74ef0064-7c14-4e0d-8dba-adac77512934" industryChanged="false" isActive="true" isAuthorization="true" isDefaultDimensionAttribute="false" isDefaultMeasureAttribute="false" isFeature="true" isGlobalization="false" isHide="false" isKey="false" isNullable="true" isReadOnly="false" isShare="false" isSource="false" length="50" maxValue="" minValue="" modifyIndustry="0" name="pid" notSerialize="false" precise="" refModelName="" resid="" sequence="3" typeDisplayName="String" typeName="String" versionType="0" visibility="public"/>
+            </attributelist>
+            <operationlist/>
+            <busiitfs>
+                <itfid>6c8722b9-911a-489b-8d0d-18bd3734fcf6</itfid>
+            </busiitfs>
+            <busimaps>
+                <busimap attrid="fbd1daa3-b261-4250-a92e-888e4046d0c2" attrpath="" attrpathid="" busiitfattrid="5dd3c721-22ad-42b1-9c10-4351c236bc77" busiitfid="6c8722b9-911a-489b-8d0d-18bd3734fcf6" cellid="4ea03863-8035-4cf0-add3-37b85ad9ec1a"/>
+                <busimap attrid="74ef0064-7c14-4e0d-8dba-adac77512934" attrpath="" attrpathid="" busiitfattrid="c8334364-7ab9-4266-8d4b-e74537935e46" busiitfid="6c8722b9-911a-489b-8d0d-18bd3734fcf6" cellid="4ea03863-8035-4cf0-add3-37b85ad9ec1a"/>
+                <busimap attrid="" attrpath="" attrpathid="" busiitfattrid="ecf1b76a-6e44-42e2-a55e-87596504775b" busiitfid="6c8722b9-911a-489b-8d0d-18bd3734fcf6" cellid="4ea03863-8035-4cf0-add3-37b85ad9ec1a"/>
+                <busimap attrid="6cd6de12-d823-4095-82ac-855fdbe37acb" attrpath="" attrpathid="" busiitfattrid="d32cc17b-f415-415a-923f-0764443eb102" busiitfid="6c8722b9-911a-489b-8d0d-18bd3734fcf6" cellid="4ea03863-8035-4cf0-add3-37b85ad9ec1a"/>
+                <busimap attrid="3eee4c6e-d32f-43ce-9dc4-8401b8f3be1e" attrpath="" attrpathid="" busiitfattrid="89578a97-42fe-439b-827c-8eabd9e3604c" busiitfid="6c8722b9-911a-489b-8d0d-18bd3734fcf6" cellid="4ea03863-8035-4cf0-add3-37b85ad9ec1a"/>
+                <busimap attrid="" attrpath="" attrpathid="" busiitfattrid="a47e6cda-09e4-480b-923f-ec6f41e3e06c" busiitfid="6c8722b9-911a-489b-8d0d-18bd3734fcf6" cellid="4ea03863-8035-4cf0-add3-37b85ad9ec1a"/>
+            </busimaps>
+            <canzhaolist/>
+            <accessor classFullname="nc.md.model.access.javamap.NCBeanStyle" displayName="NCVO" name="NCVO">
+                <properties/>
+            </accessor>
+        </entity>
+        <Reference componentID="3375a071-24fa-453d-aeb0-4003e148c960" createIndustry="0" createTime="2015-05-19 15:45:53" creator="YONYOU NC" description="" displayName="引用：IBDObject" fullClassName="nc.vo.docmng.busipoweritem.reference" height="100" help="" id="1ace0463-d243-45d5-bfaf-464277fac36d" industryChanged="false" isSource="true" mdFilePath="\meta\general_interface.bmf" modifier="YONYOU NC" modifyIndustry="0" modifyTime="2015-05-19 15:45:57" moduleName="uap" name="reference" refId="6c8722b9-911a-489b-8d0d-18bd3734fcf6" resid="" versionType="0" visibility="public" width="100" x="138" y="70"/>
+    </celllist>
+    <connectlist>
+        <busiitfconnection bizItfImpClassName="" componentID="3375a071-24fa-453d-aeb0-4003e148c960" createIndustry="0" createTime="2015-05-19 15:45:57" creator="" description="" displayName="" help="" id="a582ee05-80c0-4691-b7d7-188accae0e28" industryChanged="false" isSource="false" modifier="YONYOU NC" modifyIndustry="0" modifyTime="2015-05-19 15:45:57" name="busiItf connection" realsource="4ea03863-8035-4cf0-add3-37b85ad9ec1a" realtarget="6c8722b9-911a-489b-8d0d-18bd3734fcf6" source="4ea03863-8035-4cf0-add3-37b85ad9ec1a" target="1ace0463-d243-45d5-bfaf-464277fac36d" versionType="0">
+            <points/>
+        </busiitfconnection>
+    </connectlist>
+    <refdepends>
+        <dependfile entityid="6c8722b9-911a-489b-8d0d-18bd3734fcf6"/>
+    </refdepends>
+    <refdependLoseIDs/>
+    <cellRemoveLog/>
+    <rulers>
+        <ruler isHorizontal="true" unit="0">
+            <guideList/>
+        </ruler>
+        <ruler isHorizontal="false" unit="0">
+            <guideList/>
+        </ruler>
+    </rulers>
+</component>

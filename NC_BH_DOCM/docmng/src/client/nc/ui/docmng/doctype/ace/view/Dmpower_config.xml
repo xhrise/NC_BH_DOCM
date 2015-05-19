@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="GBK"?>
+
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+	<!-- 环境变量 -->
+	<bean id="context" class="nc.vo.uif2.LoginContext"></bean>  
+
+
+
+	<!-- 应用服务类，负责进行模型操作的处理 -->
+	<bean id="powerModelService" class="nc.ui.docmng.docpower.ace.serviceproxy.PowerModelService"/>
+
+	<!-- 对象转换器工厂，由此获取操作对象的特征信息 -->
+	<bean id="BOAdapterFactory" class="nc.vo.bd.meta.GeneralBDObjectAdapterFactory">
+		<property name="mode" value="MD"/>
+	</bean>
+	
+	<!-- 对象转换器工厂，BusiPowerItem转为IBDObject -->
+	<bean id="businessObjectAdapterFactory" class="nc.ui.docmng.doctype.ace.model.BusiPowerItemBDObjectAdaptorFactory" />
+	
+	<!-- 功能资源树生成策略 -->
+	<bean id="busiItemTreeCreateStrategy" class="nc.ui.docmng.doctype.ace.view.BusiItemTreeCreateStrategy"/>
+
+
+	<!-- 卡片列表模型元素 -->
+	<bean id="model" class="nc.ui.uif2.model.BillManageModel">
+		<property name="context"><ref bean="context"/></property>
+		<property name="service"><ref bean="powerModelService" /></property>
+		<property name="businessObjectAdapterFactory"><ref bean="BOAdapterFactory"/></property>
+	</bean>
+	
+	<!-- 树结构模型 -->
+	<bean id="detailTreemodel" class="nc.ui.docmng.doctype.ace.model.DetailTreemodel">
+		<property name="context" ref="context"/>
+		<property name="treeCreateStrategy" ref="busiItemTreeCreateStrategy" /> 
+		<property name="businessObjectAdapterFactory" ref="businessObjectAdapterFactory" /> 
+	</bean>
+
+
+	<!-- 列表分页Model -->
+	<bean id="paginationModel" class="nc.ui.uif2.components.pagination.PaginationModel" init-method="init">
+	</bean>
+	<bean id="paginationDelegator" class="nc.ui.uif2.components.pagination.BillManagePaginationDelegator">
+		<constructor-arg>
+			<ref bean="model"/>
+		</constructor-arg>
+		<constructor-arg>
+			<ref bean="paginationModel"/>
+		</constructor-arg>
+	</bean>
+	
+		<!-- 卡片列表数据模型管理器，主要负责各种方式的模型初始化 -->
+	<bean id="modelDataManager" class="nc.ui.uap.rbac.resp.model.ResponsibilitycModelDataManager">
+		<property name="responsibilityModel" ref="respAppModel"></property>
+		<property name="paginationModel" ref="paginationModel"></property>
+		<property name="paginationDelegator" ref="paginationDelegator"></property>
+		<property name="exceptionHandler"><ref bean="exceptionHandler" /></property>
+	</bean>
+	
+	
+		<!-- 权限InitDataListener -->
+	<bean name="InitDataListener" class="nc.ui.uap.rbac.resp.model.ResponsibilityInitDataListener">
+		<property name="dataManager" ref="modelDataManager"></property>
+	</bean>
+	
+	
+		<!-- 模板容器，负责对模板的统一装载 -->
+	<bean id="templateContainer" class="nc.ui.uif2.editor.TemplateContainer"  init-method="load">
+		<property name="context" ref="context"/>
+		<property name="nodeKeies">
+			<list>
+				<value>bt</value>
+			</list>
+			</property>
+	</bean>
+	
+	
+		<!-- 界面元素 ***********************************************************-->
+		<!-- 列表界面 -->
+	<bean id="powerListView" class="nc.ui.docmng.doctype.ace.view.PowerListView" init-method="initUI">
+		<property name="model"><ref bean="model" /></property>
+		<property name="multiSelectionEnable" value="true" />
+		<property name="nodekey" value="bt" />
+		<property name="templateContainer" ref="templateContainer"/>
+		<property name="south" ref="paginationBar"></property>
+		<property name="north" ref="powerToolBarPanel"></property>
+	</bean>
+	
+	<bean id="powerToolBarPanel" class="nc.ui.uif2.tangramlayout.CardLayoutToolbarPanel">
+		<property name="model" ref="model"></property>
+	</bean>
+	
+		<!-- 卡片界面 -->
+	<bean id="powerEditor" class="nc.ui.docmng.doctype.ace.view.PowerEditor" init-method="initUI">
+		<property name="model"><ref bean="model" /></property>
+		<property name="nodekey" value="bt" />
+		<property name="templateContainer" ref="templateContainer"/>
+		<property name="north" ref="editortoolBarPanel"></property>
+		<property name="detailTreeModel" ref="detailTreemodel"></property>
+	</bean>
+	
+	<bean id="editortoolBarPanel" class="nc.ui.uif2.tangramlayout.CardLayoutToolbarPanel">
+		<property name="actions">
+	    	<list>
+	    		<ref bean="firstlineAction"/>
+	    		<ref bean="prelineAction"/>
+	    		<ref bean="nextlineAction"/>
+	    		<ref bean="lastLineAction"/>
+	    	</list>
+	    </property>
+	    <property name="model" ref="model"></property>
+	    <property name="titleAction" ref="returnAction"></property>
+	</bean>
+	
+	
+	
+		<!-- 树界面 -->
+	<bean id="funcTreePanel" class="nc.ui.uap.rbac.resp.view.RespFuncTreePanel" init-method="initUI">
+		<property name="model">
+			<ref bean="detailTreemodel" />
+		</property>		
+		<property name="nodekey" value="bt"></property>
+		<property name="actions">
+			<list>
+				<ref bean="funcAssignAction"/>
+				<ref bean="funcTreeRefreshAction"/>
+			</list>
+		</property>
+	</bean>
+
+
+
+	<!-- 查询面板 -->
+	<bean id="queryAreaShell" class="nc.ui.uif2.actions.QueryAreaShell"
+		init-method="initUI">
+		<property name="queryArea">
+			<bean factory-bean="queryAction" factory-method="createQueryArea" />
+		</property>
+	</bean>
+	
+	<bean id="paginationBar" class="nc.ui.uif2.components.pagination.PaginationBar">
+		<property name="paginationModel" ref="paginationModel"></property>
+		<property name="context" ref="context"></property>
+	</bean>
+	
+		<bean id="queryTemplateContainer" class="nc.ui.uif2.editor.QueryTemplateContainer">
+		<property name="context">
+			<ref bean="context" />
+		</property>
+		<property name="nodeKey"><value>respquery</value></property>
+	</bean>
+
+	<bean id="remoteCallCombinatorCaller" class="nc.ui.uif2.editor.UIF2RemoteCallCombinatorCaller">
+		<property name="remoteCallers">
+			<list>
+				<ref bean="templateContainer"/>			
+				<ref bean="queryTemplateContainer"/>			
+			</list>
+		</property>
+	</bean>
+
+
+
+	<!-- 界面布局总装*********************************************************** -->
+	<bean id="container" class="nc.ui.uif2.TangramContainer"
+		init-method="initUI">
+		<property name="tangramLayoutRoot">
+			<bean class="nc.ui.uif2.tangramlayout.node.TBNode">
+				<property name="tabs">
+					<list>
+						<bean class="nc.ui.uif2.tangramlayout.node.HSNode">
+							<property name="name">
+								<bean class="nc.ui.uif2.I18nFB ">
+									<property name="resDir" value="10120ROLM"></property>
+									<property name="resId" value="UC001-0000107"></property>
+									<property name="defaultValue" value="列表"></property>
+								</bean>
+							</property>
+							<property name="left">
+								<bean class="nc.ui.uif2.tangramlayout.node.CNode">
+									<property name="component">
+										<ref bean="queryAreaShell" />
+									</property>
+								</bean>
+							</property>
+							<property name="right">
+								<bean class="nc.ui.uif2.tangramlayout.node.CNode">
+									<property name="component">
+										<ref bean="respListView" />
+									</property>
+								</bean>
+							</property>
+							<property name="dividerLocation" value="0.2f" />
+						</bean>
+						<bean class="nc.ui.uif2.tangramlayout.node.VSNode">
+							<property name="name">
+								<bean class="nc.ui.uif2.I18nFB ">
+									<property name="resDir" value="10120ROLM"></property>
+									<property name="resId" value="UC001-0000106"></property>
+									<property name="defaultValue" value="卡片"></property>
+								</bean>
+							</property>
+							<property name="up">
+								<bean class="nc.ui.uif2.tangramlayout.node.CNode">
+									<property name="component">
+										<ref bean="respEditor" />
+									</property>
+								</bean>
+							</property>
+							<property name="down">
+								<bean class="nc.ui.uif2.tangramlayout.node.TBNode">
+									<property name="tabs">
+										<list>
+											<bean class="nc.ui.uif2.tangramlayout.node.CNode">
+												<property name="name">
+													<bean class="nc.ui.uif2.I18nFB ">
+														<property name="resDir" value="10120RESPADMIN"></property>
+														<property name="resId" value="010120RESPADMIN0006"></property>
+														<property name="defaultValue" value="功能设置"></property>
+													</bean>
+												</property>
+												<property name="component">
+													<ref bean="funcTreePanel" />
+												</property>
+											</bean>
+											<bean class="nc.ui.uif2.tangramlayout.node.CNode">
+												<property name="name">
+													<bean class="nc.ui.uif2.I18nFB ">
+														<property name="resDir" value="10120RESPADMIN"></property>
+														<property name="resId" value="010120RESPADMIN00010"></property>
+														<property name="defaultValue" value="关联角色"></property>
+													</bean>
+												</property>
+												<property name="component">
+													<ref bean="respRelateRoleTable" />
+												</property>
+											</bean>
+										</list>
+									</property>
+								</bean>
+							</property>
+							<property name="dividerLocation" value="200.0f" />
+						</bean>
+					</list>
+				</property>
+				<property name="name" value="" />
+				<property name="showMode" value="CardLayout"></property>
+			</bean>
+		</property>
+		<property name="model">
+			<ref bean="model" />
+		</property>
+	</bean>
+	
+	
+	<bean id="firstlineAction" class="nc.ui.uif2.actions.FirstLineAction">
+		<property name="model" ref="model"></property>
+		<property name="exceptionHandler" ref="exceptionHandler"></property>
+	</bean>
+	
+	<bean id="prelineAction" class="nc.ui.uif2.actions.PreLineAction">
+		<property name="model" ref="model"></property>
+		<property name="exceptionHandler" ref="exceptionHandler"></property>
+	</bean>
+	
+	<bean id="nextlineAction" class="nc.ui.uif2.actions.NextLineAction">
+		<property name="model" ref="model"></property>
+		<property name="exceptionHandler" ref="exceptionHandler"></property>
+	</bean>
+	
+	<bean id="lastLineAction" class="nc.ui.uif2.actions.LastLineAction">
+		<property name="model" ref="model"></property>
+		<property name="exceptionHandler" ref="exceptionHandler"></property>
+	</bean>
+	
+	<bean id="returnAction" class="nc.ui.uif2.actions.ShowMeUpAction">
+		<property name="goComponent" ref="powerListView"></property>
+	</bean>
+
+	<bean id="toftpanelActionContributors" class="nc.ui.uif2.actions.ActionContributors">
+		<property name="contributors">
+			<list>
+				<ref bean="actionsOfList"></ref>
+				<ref bean="actionsOfCard"></ref>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="actionsOfList" class="nc.ui.uif2.actions.StandAloneToftPanelActionContainer">
+		<constructor-arg>
+			<ref bean="respListView" />
+		</constructor-arg>
+		<property name="actions">
+			<list>
+				<ref bean="addAction" />
+				<ref bean="editAction" />
+				<ref bean="deleteAction" />
+				<ref bean="seperatorAction" />
+				<ref bean="queryAction" />
+				<ref bean="refreshAction" />
+				<ref bean="seperatorAction" />
+				<ref bean="createRoleAction" />
+			</list>
+		</property>
+	    <property name="editActions">
+			<list>
+				<ref bean="saveAction" />
+				<ref bean="saveAddAction" />
+				<ref bean="seperatorAction" />
+				<ref bean="cancelAction" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- 构造方法中传入的界面显示时，配置的Action才可见 -->
+	<bean id="actionsOfCard" class="nc.ui.uif2.actions.StandAloneToftPanelActionContainer">
+		<constructor-arg ref="respEditor" />
+		<property name="actions">
+			<list>
+				<ref bean="addAction" />
+				<ref bean="editAction" />
+				<ref bean="deleteAction" />
+				<ref bean="seperatorAction" />
+				<ref bean="queryAction" />
+				<ref bean="refreshAction" />
+				<ref bean="seperatorAction" />
+				<ref bean="funcAssignAction" />
+				<ref bean="createRoleAction" />
+				<ref bean="importFuncAction" />
+			</list>
+		</property>
+		<property name="editActions">
+			<list>
+				<ref bean="saveAction" />
+				<ref bean="saveAddAction" />
+				<ref bean="seperatorAction" />
+				<ref bean="cancelAction" />
+			</list>
+		</property>
+		<property name="model">
+			<ref bean="respAppModel" />
+		</property>
+	</bean>
+
+
+	
+	<!-- Action部分 ***********************************************************-->
+	<bean id="addAction" class="nc.ui.uap.rbac.resp.action.ResponsibilityAddAction">
+		<property name="model"><ref bean="model"/></property>
+		<property name="funcTreeModel"><ref bean="detailTreeModel"/></property>
+		<property name="exceptionHandler"><ref bean="exceptionHandler" /></property>
+	</bean>
+
+	<bean id="editAction" class="nc.ui.uif2.actions.EditAction">
+		<property name="model"><ref bean="model"/></property>
+		<property name="exceptionHandler"><ref bean="exceptionHandler" /></property>
+	</bean>
+
+	<bean id="deleteAction" class="nc.ui.uif2.actions.DeleteAction">
+		<property name="model"><ref bean="model"/></property>
+		<property name="exceptionHandler"><ref bean="exceptionHandler" /></property>
+	</bean>
+	
+	
+	<bean id="refreshAction" class="nc.ui.uap.rbac.ListCardRefreshAction">
+		<property name="model"><ref bean="model"/></property>
+		<property name="dataManager"><ref bean="modelDataManager"/></property>
+		<property name="cardEditor" ref="powerEditor"></property>
+		<property name="exceptionHandler"><ref bean="exceptionHandler" /></property>
+	</bean>
+
+	<bean id="saveAction" class="nc.ui.uif2.actions.SaveAction">
+		<property name="model"><ref bean="model"/></property>
+		<property name="editor"><ref bean="powerEditor"/></property>
+		<property name="exceptionHandler"><ref bean="exceptionHandler" /></property>
+	</bean>
+	
+	<!-- 保存新增 -->
+	<bean id="saveAddAction" class="nc.ui.uif2.actions.SaveAddAction">
+	   <property name="model" ref="model"></property>
+	   <property name="addAction" ref="addAction"></property>
+	   <property name="editor" ref="powerEditor"></property>
+	   <property name="exceptionHandler" ref="exceptionHandler"></property>
+	</bean>
+
+	<bean id="cancelAction" class="nc.ui.uap.rbac.resp.action.RespCancelAction">
+		<property name="model"><ref bean="model"/></property>
+		<property name="editor"><ref bean="powerEditor"/></property>
+		<property name="exceptionHandler"><ref bean="exceptionHandler" /></property>
+	</bean>
+
+	<bean id="queryAction" class="nc.ui.uif2.actions.QueryAction">
+		<property name="model" ref="model" />
+		<property name="dataManager" ref="modelDataManager" />
+		<property name="templateContainer" ref="queryTemplateContainer"></property>
+		<property name="exceptionHandler">
+			<ref bean="exceptionHandler" />
+		</property>
+	</bean>
+	
+	<bean id="funcAssignAction" class="nc.ui.uap.rbac.resp.action.RespFuncAssignAction">
+		<property name="model" ref="model"/>
+		<property name="funcTreeModel" ref="detailTreemodel"/>
+		<property name="respFuncTreePanel" ref="detailTreePanel" />
+		<property name="code" value="RespAssignFunc"></property>	
+		<property name="respEditor" ref="powerEditor"/>
+		<property name="showNameInToolbar" value="true"></property>
+		<property name="exceptionHandler"><ref bean="exceptionHandler" /></property>
+	</bean> 
+	
+	
+	<bean id="exceptionHandler" class="nc.ui.uif2.DefaultExceptionHanler">
+		<property name="context"><ref bean="context" /></property>
+	</bean>
+
+</beans>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="gbk"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<bean id="menuItem" class="nc.pubapp.pade.funcmodel.vo.MenuItem"><property name="dr" value="0"/>
+<property name="funModelFilePath" value="docmng/funcmodel/docproperty/funcregis/DMJ102.menu"/>
+<property name="funcode" value="DMJ102"/>
+<property name="ismenutype" value="false"/>
+<property name="menuitemcode" value="DMJ102"/>
+<property name="menuitemname" value="文档中心"/>
+<property name="pk_menuitem" value="0001ZZ1000000000PHFV"/>
+<property name="resid" value="DDMJ102"/>
+<property name="ts" value="2015-05-11 17:23:32"/>
+</bean>
+
+</beans>

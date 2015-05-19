@@ -12,7 +12,7 @@ public class DocType extends SuperVO {
 /**
 *编码
 */
-public String code;
+public static final String CODE="code";
 /**
 *创建时间
 */
@@ -102,6 +102,10 @@ public static final String DEF8="def8";
 */
 public static final String DEF9="def9";
 /**
+*内部码
+*/
+public static final String INNERCODE="innercode";
+/**
 *修改时间
 */
 public static final String MODIFIEDTIME="modifiedtime";
@@ -136,7 +140,7 @@ public UFDateTime ts;
 /**
 *名称
 */
-public String vcode;
+public static final String NAME="name";
 /**
 *备注
 */
@@ -147,7 +151,7 @@ public static final String VMEMO="vmemo";
 * @return 编码
 */
 public String getCode () {
-return this.code;
+return (String) this.getAttributeValue( DocType.CODE);
  } 
 
 /** 
@@ -156,7 +160,7 @@ return this.code;
 * @param code 编码
 */
 public void setCode ( String code) {
-this.code=code;
+this.setAttributeValue( DocType.CODE,code);
  } 
 
 /** 
@@ -556,6 +560,24 @@ this.setAttributeValue( DocType.DEF9,def9);
  } 
 
 /** 
+* 获取内部码
+*
+* @return 内部码
+*/
+public String getInnercode () {
+return (String) this.getAttributeValue( DocType.INNERCODE);
+ } 
+
+/** 
+* 设置内部码
+*
+* @param innercode 内部码
+*/
+public void setInnercode ( String innercode) {
+this.setAttributeValue( DocType.INNERCODE,innercode);
+ } 
+
+/** 
 * 获取修改时间
 *
 * @return 修改时间
@@ -704,8 +726,8 @@ this.ts=ts;
 *
 * @return 名称
 */
-public String getVcode () {
-return this.vcode;
+public String getName () {
+return (String) this.getAttributeValue( DocType.NAME);
  } 
 
 /** 
@@ -713,8 +735,8 @@ return this.vcode;
 *
 * @param vcode 名称
 */
-public void setVcode ( String vcode) {
-this.vcode=vcode;
+public void setName ( String name) {
+this.setAttributeValue( DocType.NAME,name);
  } 
 
 /** 
@@ -740,4 +762,12 @@ this.setAttributeValue( DocType.VMEMO,vmemo);
   public IVOMeta getMetaData() {
     return VOMetaFactory.getInstance().getVOMeta("docmng.doctype");
   }
+
+@Override
+public String toString() {
+	String s = this.getCode()+" " +this.getName();
+	return s;
+}
+  
+  
 }

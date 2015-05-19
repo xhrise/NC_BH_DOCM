@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="gbk"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<bean id="funcregister" class="nc.pubapp.pade.funcmodel.vo.FuncRegister"><property name="bmf_path" value="docmng\METADATA\docproperty.bmf"/>
+<property name="busiActiveList">
+<list></list>
+</property>
+<property name="cfunid" value="0001ZZ1000000000PHFT"/>
+<property name="class_name" value="nc.ui.pubapp.uif2app.ToftPanelAdaptorEx"/>
+<property name="dr" value="0"/>
+<property name="fun_name" value="文档中心"/>
+<property name="fun_property" value="0"/>
+<property name="funcRegisterButtonList">
+<list></list>
+</property>
+<property name="funcRegisterParamList">
+<list><bean class="nc.pubapp.pade.funcmodel.vo.FuncRegisterParam"><property name="dr" value="0"/>
+<property name="paramname" value="BeanConfigFilePath"/>
+<property name="paramvalue" value="nc/ui/docmng/docproperty/ace/view/Docproperty_config.xml"/>
+<property name="parentid" value="0001ZZ1000000000PHFT"/>
+<property name="pk_param" value="0001ZZ1000000000PHFU"/>
+<property name="ts" value="2015-05-11 17:23:32"/>
+</bean>
+</list>
+</property>
+<property name="funcode" value="DMJ102"/>
+<property name="funnode_path" value="docmng\ace\client\DMJ102.fnf"/>
+<property name="funtype" value="0"/>
+<property name="isbuttonpower" value="false"/>
+<property name="isenable" value="true"/>
+<property name="isfunctype" value="false"/>
+<property name="menuModelFilePath" value="docmng/funcmodel/docproperty/menuitemregis/DMJ102.menu"/>
+<property name="metaDataID" value="b336bdc6-55ce-48a6-8b2f-0119cb119da9"/>
+<property name="moduleName" value="docmng"/>
+<property name="orgtypecode" value="GLOBLE00000000000000"/>
+<property name="own_module" value="DMJ1"/>
+<property name="pageList">
+<list></list>
+</property>
+<property name="pk_group" value="~"/>
+<property name="ts" value="2015-05-11 17:23:32"/>
+<property name="uif2model_path" value="docmng\ace\uif2model\DMJ102.umf"/>
+</bean>
+
+</beans>

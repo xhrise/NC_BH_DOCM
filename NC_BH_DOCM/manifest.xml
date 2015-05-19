@@ -16,6 +16,9 @@
     <resource>
       <src name="resources"/>
     </resource>
-    <funnodes/>
+    <funnodes>
+      <funnode name="文档类型" code="DMJ101" funnode="docmng/ace/client/DMJ101.fnf" service="docmng/ace/service/DMJ101.smf"/>
+      <funnode name="文档中心" code="DMJ102" funnode="docmng/ace/client/DMJ102.fnf" service="docmng/ace/service/DMJ102.smf"/>
+    </funnodes>
   </BusinessComponet>
 </Manifest>
