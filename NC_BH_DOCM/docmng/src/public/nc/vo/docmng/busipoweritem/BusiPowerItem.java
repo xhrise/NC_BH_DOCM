@@ -7,6 +7,7 @@ import nc.vo.pub.lang.UFDate;
 import nc.vo.pub.lang.UFDateTime;
 import nc.vo.pub.lang.UFDouble;
 import nc.vo.pubapp.pattern.model.meta.entity.vo.VOMetaFactory;
+import nc.vo.uap.rbac.BusiFuncItemVO;
 
 public class BusiPowerItem extends SuperVO {
 /**
@@ -18,6 +19,10 @@ public String code;
 */
 public String name;
 /**
+*功能
+*/
+public String permdisplay;
+/**
 *上级对象
 */
 public String pid;
@@ -25,6 +30,10 @@ public String pid;
 *主键
 */
 public String pk_busipower;
+/**
+*明细
+*/
+public String pk_detail;
 /**
 *时间戳
 */
@@ -66,6 +75,24 @@ this.name=name;
  } 
 
 /** 
+* 获取功能
+*
+* @return 功能
+*/
+public String getPermdisplay () {
+return this.permdisplay;
+ } 
+
+/** 
+* 设置功能
+*
+* @param permdisplay 功能
+*/
+public void setPermdisplay ( String permdisplay) {
+this.permdisplay=permdisplay;
+ } 
+
+/** 
 * 获取上级对象
 *
 * @return 上级对象
@@ -102,6 +129,24 @@ this.pk_busipower=pk_busipower;
  } 
 
 /** 
+* 获取明细
+*
+* @return 明细
+*/
+public String getPk_detail () {
+return this.pk_detail;
+ } 
+
+/** 
+* 设置明细
+*
+* @param pk_detail 明细
+*/
+public void setPk_detail ( String pk_detail) {
+this.pk_detail=pk_detail;
+ } 
+
+/** 
 * 获取时间戳
 *
 * @return 时间戳
@@ -120,7 +165,43 @@ this.ts=ts;
  } 
 
 
+@Override
+public boolean equals(Object o) {
+	if (!(o instanceof BusiPowerItem))
+		return false;
+	BusiPowerItem vo = (BusiPowerItem) o;
+	String s1 = getPk_busipower();
+	String s2 = vo.getPk_busipower();
+	if (s1 == null && s2 == null)
+		return true;
+	else if (s1 == null || s2 == null)
+		return false;
+	else if (s1.equals(s2))
+		return true;
+	else
+		return false;
+}
+
+@Override
+public int hashCode() {
+	return super.hashCode();
+}
+
+
+
+
   @Override
+public String getPrimaryKey() {
+	// TODO Auto-generated method stub
+	return this.getPk_detail();
+}
+
+@Override
+public String toString() {
+	  return this.getCode() + "  " + this.getName(); 
+}
+
+@Override
   public IVOMeta getMetaData() {
     return VOMetaFactory.getInstance().getVOMeta("docmng.BusiPowerItem");
   }

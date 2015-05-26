@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding='gb2312'?>
+<module name="docmng">
+  <public>
+	<component remote="true" singleton="true"  tx="CMT">
+	  <interface>nc.itf.docpower.IPowerQueryService</interface>
+	  <implementation>nc.impl.pub.docpower.PowerQueryServiceImpl</implementation>
+	</component>
+	
+	<component remote="true" singleton="true"  tx="CMT">
+	  <interface>nc.itf.docpower.IPowerService</interface>
+	  <implementation>nc.impl.pub.docpower.PowerServiceImpl</implementation>
+	</component>
+
+  </public> 
+</module> 

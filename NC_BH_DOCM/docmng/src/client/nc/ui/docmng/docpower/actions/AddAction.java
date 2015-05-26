@@ -25,16 +25,18 @@ public class AddAction extends nc.ui.uif2.actions.AddAction {
 	@Override
 	public void doAction(ActionEvent e) throws Exception {
 		super.doAction(e);
-		getFuncTreeModel().initModel(null);
+		getDetailTreeModel().initModel(null);
 	}
 
 
-	public HierachicalDataAppModel getFuncTreeModel() {
+	public HierachicalDataAppModel getDetailTreeModel() {
 		return detailTreeModel;
 	}
 
 
-	public void setFuncTreeModel(HierachicalDataAppModel detailTreeModel) {
+	public void setDetailTreeModel(HierachicalDataAppModel detailTreeModel) {
 		this.detailTreeModel = detailTreeModel;
 	}
+
+	
 }

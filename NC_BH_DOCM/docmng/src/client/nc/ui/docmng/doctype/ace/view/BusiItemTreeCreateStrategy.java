@@ -11,7 +11,7 @@ public class BusiItemTreeCreateStrategy  extends AbastractTreeCreateStrategy {
 	
 	@Override
 	public DefaultMutableTreeNode createTreeNode(Object obj) {
-		BusiFuncItemVO vo = (BusiFuncItemVO) obj;
+		BusiPowerItem vo = (BusiPowerItem) obj;
 		DefaultMutableTreeNode node = new DefaultMutableTreeNode(vo);
 		return node;
 	}

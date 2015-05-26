@@ -5,6 +5,10 @@
 	  <interface>nc.itf.docmng.IDocpropertyMaintain</interface>
 	  <implementation>nc.impl.docmng.DocpropertyMaintainImpl</implementation>
 	</component>
+	<component remote="true" singleton="true"  tx="CMT">
+	  <interface>nc.itf.docmng.IFilePathGenerator</interface>
+	  <implementation>nc.impl.docmng.FilePathGeneratorImpl</implementation>
+	</component>
 
   </public> 
 </module> 

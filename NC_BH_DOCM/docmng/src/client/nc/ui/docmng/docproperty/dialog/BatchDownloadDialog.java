@@ -24,7 +24,7 @@ import nc.vo.docmng.docproperty.DocProperty;
 import nc.vo.pubapp.AppContext;
 
 @SuppressWarnings("deprecation")
-public class ProjectChooseDialog extends UIDialog {
+public class BatchDownloadDialog extends UIDialog {
 
 	private BillCardPanel bcp;
 
@@ -37,7 +37,7 @@ public class ProjectChooseDialog extends UIDialog {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public ProjectChooseDialog(Container con) {
+	public BatchDownloadDialog(Container con) {
 		super(con);
 		this.init();
 
@@ -47,10 +47,10 @@ public class ProjectChooseDialog extends UIDialog {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (e.getSource() == ProjectChooseDialog.this.getAffirmBtn()) {
-				ProjectChooseDialog.this.onBtnAffirm();
-			} else if (e.getSource() == ProjectChooseDialog.this.getCancelBtn()) {
-				ProjectChooseDialog.this.onBtnCancel();
+			if (e.getSource() == BatchDownloadDialog.this.getAffirmBtn()) {
+				BatchDownloadDialog.this.onBtnAffirm();
+			} else if (e.getSource() == BatchDownloadDialog.this.getCancelBtn()) {
+				BatchDownloadDialog.this.onBtnCancel();
 			}
 		}
 
@@ -76,8 +76,8 @@ public class ProjectChooseDialog extends UIDialog {
 	}
 
 	private void init() {
-		this.setTitle("上传信息");
-		this.setSize(750, 300);
+		this.setTitle("下载信息");
+		this.setSize(600, 100);
 		this.setResizable(true);
 		UIPanel uip = new UIPanel(new BorderLayout());
 		uip.add(this.getBillCardPanel());
@@ -96,7 +96,7 @@ public class ProjectChooseDialog extends UIDialog {
 	private BillCardPanel getBillCardPanel() {
 		if (this.bcp == null) {
 			this.bcp = new BillCardPanel();
-			this.bcp.loadTemplet("DMJ10201", "", "", "");
+			this.bcp.loadTemplet("DMJ10203", "", "", "");
 			BillItem itemProject = this.bcp.getHeadItem(DocProperty.PK_PROJECT);
 			UIRefPane uiPanel = (UIRefPane) itemProject.getComponent();
 			// ProjectDefaultRefModel project = (ProjectDefaultRefModel)
@@ -105,10 +105,6 @@ public class ProjectChooseDialog extends UIDialog {
 			// uiPanel.setPk_org(null);
 			// project.reloadData();
 			uiPanel.setRefModel(new ProjectDefaultRefModel());
-			BillItem itemUpload = this.bcp.getHeadItem("pk_uploader");
-			itemUpload.setValue(AppContext.getInstance().getPkUser());
-			BillItem dcreatedate = this.bcp.getHeadItem("dcreatedate");
-			dcreatedate.setValue(AppContext.getInstance().getBusiDate());
 			bcp.addEditListener(new BillEditListener() {
 
 				@Override
@@ -120,14 +116,14 @@ public class ProjectChooseDialog extends UIDialog {
 				@Override
 				public void afterEdit(BillEditEvent e) {
 					if (e.getKey().equals("pk_project")) {
-						BillItem item = ProjectChooseDialog.this.bcp
+						BillItem item = BatchDownloadDialog.this.bcp
 								.getHeadItem("def1");
 						item.setValue(null);
-						BillItem project = ProjectChooseDialog.this.bcp
+						BillItem project = BatchDownloadDialog.this.bcp
 								.getHeadItem("pk_project");
 						UIRefPane ref = (UIRefPane) item.getComponent();
 						SubProjectRefModel refModel =  (SubProjectRefModel) ref.getRefModel();
-						refModel.setKey(project.getValueObject().toString());
+						refModel.setKey(project==null?"":project.getValueObject().toString());
 					}
 				}
 			});

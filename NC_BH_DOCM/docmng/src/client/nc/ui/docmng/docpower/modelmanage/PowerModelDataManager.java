@@ -11,6 +11,7 @@ import nc.ui.uif2.IExceptionHandler;
 import nc.ui.uif2.LongUITask;
 import nc.ui.uif2.components.pagination.BillManagePaginationDelegator;
 import nc.ui.uif2.components.pagination.IPaginationModelListener;
+import nc.ui.uif2.components.pagination.IPaginationQueryService;
 import nc.ui.uif2.components.pagination.PaginationModel;
 import nc.ui.uif2.model.BillManageModel;
 import nc.ui.uif2.model.IAppModelDataManagerEx;
@@ -49,7 +50,7 @@ public class PowerModelDataManager implements AppEventListener,
 
 	@Override
 	public void refresh() {
-		// TODO 自动生成的方法存根
+		initModelBySqlWhere(queryCond);
 
 	}
 
@@ -96,7 +97,7 @@ public class PowerModelDataManager implements AppEventListener,
 
 	@Override
 	public void onDataReady() {
-		// TODO 自动生成的方法存根
+		getPaginationDelegator().onDataReady();
 
 	}
 
@@ -112,6 +113,7 @@ public class PowerModelDataManager implements AppEventListener,
 
 	public void setModel(BillManageModel model) {
 		this.model = model;
+		this.model.addAppEventListener(this);
 	}
 
 	public IExceptionHandler getExceptionHandler() {
@@ -128,6 +130,13 @@ public class PowerModelDataManager implements AppEventListener,
 
 	public void setPaginationModel(PaginationModel paginationModel) {
 		this.paginationModel = paginationModel;
+		this.paginationModel.addPaginationModelListener(this);		
+		this.paginationModel.setPaginationQueryService(new IPaginationQueryService() {
+			@Override
+			public Object[] queryObjectByPks(String[] pks) throws BusinessException {
+				return getPowerQueryService().queryPowerByPKs(pks);
+			}
+		});
 	}
 
 	public BillManagePaginationDelegator getPaginationDelegator() {
